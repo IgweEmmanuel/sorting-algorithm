@@ -1,50 +1,46 @@
 #include "sort.h"
-
 /**
- * insertion_sort_list - This function inserts in a linked list
- * @list: This is the parameter
- *
- * Return: returns new list with inserted value
+ * insertion_sort_list - function that sorts a doubly linked list
+ * of integers in ascending order using the Insertion sort algorithm
+ * @list: Dobule linked list to sort
  */
-
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *current, *insertion_point, *next_node;
+	listint_t *node;
 
-	if (list == NULL || *list == NULL || (*list)->next == NULL)
+	if (list == NULL || (*list)->next == NULL)
 		return;
-
-	current = (*list)->next;
-
-	while (current != NULL)
+	node = (*list)->next;
+	while (node)
 	{
-		insertion_point = current->prev;
-		next_node = current->next;
-
-		while (insertion_point != NULL && insertion_point->n > current->n)
+		while ((node->prev) && (node->prev->n > node->n))
 		{
-			insertion_point = insertion_point->prev;
+			node = swap_node(node, list);
+			print_list(*list);
 		}
-
-		if (insertion_point == NULL)
-		{
-			current = next_node;
-			continue;
-		}
-
-		if (current->next != NULL)
-			current->next->prev = current->prev;
-		current->prev->next = current->next;
-
-		if (insertion_point->next != NULL)
-			insertion_point->next->prev = current;
-		current->next = insertion_point->next;
-		insertion_point->next = current;
-		current->prev = insertion_point;
-
-		current = next_node;
-
-		print_list(*list);
+		node = node->next;
 	}
 }
+/**
+ *swap_node - swap a node for his previous one
+ *@node: node
+ *@list: node list
+ *Return: return a pointer to a node which was enter it
+ */
+listint_t *swap_node(listint_t *node, listint_t **list)
+{
+	listint_t *back = node->prev, *current = node;
+	/*NULL, 19, 48, 9, 71, 13, NULL*/
 
+	back->next = current->next;
+	if (current->next)
+		current->next->prev = back;
+	current->next = back;
+	current->prev = back->prev;
+	back->prev = current;
+	if (current->prev)
+		current->prev->next = current;
+	else
+		*list = current;
+	return (current);
+}
