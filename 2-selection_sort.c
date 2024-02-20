@@ -1,5 +1,12 @@
 #include "sort.h"
 
+/**
+ * selection_sort - This sorts in selection algorithm
+ * @array: the array of integers
+ * @size: the size of array
+ *
+ * Return: returns sorted array
+ */
 void selection_sort(int *array, size_t size)
 {
 	size_t i, j;
