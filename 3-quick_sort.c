@@ -16,7 +16,7 @@ void swap(int *array, ssize_t item1, ssize_t item2)
 }
 
 /**
- * lomuto_partition - lomuto partition sorting scheme implementation
+ * partition - lomuto partition sorting scheme implementation
  * @array: array
  * @first: first array element
  * @last: last array element
@@ -51,7 +51,7 @@ int partition(int *array, ssize_t first, ssize_t last, size_t size)
 }
 
 /**
- * qs - quicksort algorithm implementation
+ * igwe - quicksort algorithm implementation
  * @array: array
  * @first: first array element
  * @last: last array element
